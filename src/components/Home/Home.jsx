@@ -23,7 +23,14 @@ const Home = () => {
     // console.log(allActors)
     const handleSelectActor = (actor) => {
         // console.log(actor);
-        setSelectedActors([...selectedActors,actor]);//store prev array and add new array
+        //validating if selected item exist or not 
+        const isExist = selectedActors.find((item) => item.id === actor.id);
+        // console.log(isExist);
+        if (isExist) {
+            return alert('already added')
+        }
+        setSelectedActors([...selectedActors, actor]);//store prev array and add new array
+
     }
     console.log(selectedActors);
 
