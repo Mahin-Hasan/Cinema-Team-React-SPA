@@ -14,6 +14,8 @@ const Home = () => {
 
     const [allActors, setAllactors] = useState([]);
     const [selectedActors, setSelectedActors] = useState([]);
+    const [remaining, setRemaining] = useState(0);
+    const [totalCost, setTotalCost] = useState(0);
 
     useEffect(() => {
         fetch("./data.json")
@@ -23,12 +25,21 @@ const Home = () => {
     // console.log(allActors)
     const handleSelectActor = (actor) => {
         // console.log(actor);
-        //validating if selected item exist or not 
+        //validating if selected item exist or not point 1
         const isExist = selectedActors.find((item) => item.id === actor.id);
+        let count = actor.salary;//setting initial value to the clicked actor price
         // console.log(isExist);
-        if (isExist) {
+        if (isExist) {//truthy check
             return alert('already added')
         }
+        selectedActors.forEach((item) => {
+            // count = count + item.salary;
+            count += item.salary//shortcut of upper line
+        })
+        const totalRemaining = 20000 - count;
+        // console.log(count,totalRemaining);
+        setTotalCost(count);
+        setRemaining(totalRemaining);
         setSelectedActors([...selectedActors, actor]);//store prev array and add new array
 
     }
@@ -54,7 +65,12 @@ const Home = () => {
                     ))}
                 </div>
                 <div className="cart">
-                    <Cart selectedActors={selectedActors}></Cart>
+                    <Cart
+                     selectedActors={selectedActors}
+                     remaining={remaining}
+                     totalCost={totalCost}
+                     
+                     ></Cart>
                 </div>
             </div>
             {/* <h1>home</h1> */}
