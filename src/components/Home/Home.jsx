@@ -38,6 +38,11 @@ const Home = () => {
         })
         const totalRemaining = 20000 - count;
         // console.log(count,totalRemaining);
+
+        // 20000 budget validation
+        if (count > 20000) {
+            return alert('No more money');
+        }
         setTotalCost(count);
         setRemaining(totalRemaining);
         setSelectedActors([...selectedActors, actor]);//store prev array and add new array
@@ -66,11 +71,11 @@ const Home = () => {
                 </div>
                 <div className="cart">
                     <Cart
-                     selectedActors={selectedActors}
-                     remaining={remaining}
-                     totalCost={totalCost}
-                     
-                     ></Cart>
+                        selectedActors={selectedActors}
+                        remaining={remaining}
+                        totalCost={totalCost}
+
+                    ></Cart>
                 </div>
             </div>
             {/* <h1>home</h1> */}
